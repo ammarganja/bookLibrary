@@ -1,9 +1,10 @@
 // book is a function constructor 
 
-function Book(name, author, type) {
+function Book(name, author, type, number) {
     this.name = name;
     this.author = author;
     this.type = type;
+    this.no = number;
 }
 
 // Display Construtor
@@ -18,12 +19,19 @@ function Display() {
 Display.prototype.add = function(book) {
     console.log("Adding to UI")
     tabelbody = document.getElementById("tabelbody")
-    let uistring = `<tr>
+    let uistring = `<tr id=${book.no}>
+                    <td>${book.no}</td>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                     <td>${book.type}</td>
+                    <td><button type="button" onclick="remove(${book.no})" class="btn btn-danger">Remove Book</button></td>
                     </tr>`;
     tabelbody.innerHTML += uistring
+}
+
+
+function remove(id) {
+    document.getElementById(id).remove()
 }
 
 
@@ -62,6 +70,7 @@ LibraryForm.addEventListener("submit", LibraryFormSubmit);
 function LibraryFormSubmit(e) {
     e.preventDefault();
     console.log("You Have submited library form");
+    let number = document.getElementById('bookNumber').value;
     let name = document.getElementById('bookName').value;
     let auther = document.getElementById('auther').value;
     let type;
@@ -77,7 +86,7 @@ function LibraryFormSubmit(e) {
         type = cooking.value;
 
     }
-    let book = new Book(name, auther, type);
+    let book = new Book(name, auther, type, number);
     console.log(book);
 
     let display = new Display(book);

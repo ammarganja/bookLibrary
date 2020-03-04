@@ -1,9 +1,10 @@
 class Book {
 
-    constructor(name, author, type) {
+    constructor(name, author, type, number) {
         this.name = name;
         this.author = author;
         this.type = type;
+        this.no = number
     }
 }
 
