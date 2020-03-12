@@ -17,14 +17,18 @@ function Display() {
 // add mathod to display Prototype
 
 Display.prototype.add = function(book) {
-    console.log("Adding to UI")
+    // console.log("Adding to UI")
     tabelbody = document.getElementById("tabelbody")
     let uistring = `<tr id=${book.no}>
                     <td>${book.no}</td>
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                     <td>${book.type}</td>
-                    <td><button type="button" onclick="remove(${book.no})" class="btn btn-danger">Remove Book</button></td>
+                     <td><a href="#"  class="btn btn-primary edit a-btn-slide-text">
+                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                     <span><strong>Edit</strong></span>            
+                    </a> <button type="button" onclick="remove(${book.no})" class="btn btn-danger">Remove Book</button>
+                    </<a>
                     </tr>`;
     tabelbody.innerHTML += uistring
 }
@@ -33,6 +37,8 @@ Display.prototype.add = function(book) {
 function remove(id) {
     document.getElementById(id).remove()
 }
+
+
 
 
 Display.prototype.clear = function() {
@@ -67,6 +73,139 @@ Display.prototype.show = function(type, displayMessage) {
 let LibraryForm = document.getElementById("LibraryForm");
 LibraryForm.addEventListener("submit", LibraryFormSubmit);
 
+
+// create array and push
+let arr1 = [];
+
+
+// data sorting
+
+function sortTablenum() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("tabelbody");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[0];
+            // console.log(x);
+            y = rows[i + 1].getElementsByTagName("TD")[0];
+
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+function sortTablestr(num) {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("tabelbody");
+    switching = true;
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[num];
+            // console.log(x);
+            y = rows[i + 1].getElementsByTagName("TD")[num];
+
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+let Filter = document.getElementById('noFilters');
+Filter.addEventListener("click", sortTablenum);
+let nameFilter = document.getElementById("nameFilters")
+nameFilter.addEventListener("click", (e) => {
+    e.preventDefault();
+    sortTablestr(1);
+});
+let authorFilter = document.getElementById("authorFilters")
+authorFilter.addEventListener("click", (e) => {
+    e.preventDefault();
+    sortTablestr(2);
+});
+let typeFilter = document.getElementById("typeFilters")
+typeFilter.addEventListener("click", (e) => {
+    e.preventDefault()
+    sortTablestr(3);
+});
+
+
+function nameFilters(event) {
+    event.preventDefault();
+}
+
+function authorFilters(event) {
+    event.preventDefault();
+}
+
+function typeFilters(event) {
+    event.preventDefault();
+}
+
+function filter(event) {
+    event.preventDefault();
+}
+
+
+
+// edit data in table
+
+
+var table = document.getElementById("tabelbody"),
+    rIndex;
+
+for (var i = 1; i < table.rows.length; i++) {
+    table.rows[i].onclick = function() {
+        rIndex = this.rowIndex;
+        console.log(rIndex);
+
+        document.getElementById("bookNumber").value = this.cells[0].innerHTML;
+        document.getElementById("bookName").value = this.cells[1].innerHTML;
+        document.getElementById("auther").value = this.cells[2].innerHTML;
+        document.getElementById("fiction").value = this.cells[3].innerHTML;
+        document.getElementById("Programming").value = this.cells[4].innerHTML;
+        document.getElementById("cooking").value = this.cells[5].innerHTML;
+    };
+}
+
+
+// edit the row
+function editRow() {
+    table.rows[rIndex].cells[0].innerHTML = document.getElementById("fname").value;
+    table.rows[rIndex].cells[1].innerHTML = document.getElementById("lname").value;
+    table.rows[rIndex].cells[2].innerHTML = document.getElementById("age").value;
+    table.rows[rIndex].cells[3].innerHTML = document.getElementById("age").value;
+    table.rows[rIndex].cells[4].innerHTML = document.getElementById("age").value;
+    table.rows[rIndex].cells[5].innerHTML = document.getElementById("age").value;
+}
+
+
+let edit = document.getElementById('noFilters');
+edit.addEventListener("click", editRow);
+
+
+
+// tabel data add
+
 function LibraryFormSubmit(e) {
     e.preventDefault();
     console.log("You Have submited library form");
@@ -77,6 +216,7 @@ function LibraryFormSubmit(e) {
     let fiction = document.getElementById('fiction');
     let Programming = document.getElementById('Programming');
     let cooking = document.getElementById('cooking');
+
 
     if (fiction.checked) {
         type = fiction.value;
@@ -89,6 +229,8 @@ function LibraryFormSubmit(e) {
     let book = new Book(name, auther, type, number);
     console.log(book);
 
+    arr1.push(book);
+    console.log(arr1);
     let display = new Display(book);
 
 
