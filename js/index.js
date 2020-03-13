@@ -7,6 +7,11 @@ function Book(name, author, type, number) {
     this.no = number;
 }
 
+
+// store in localstorage
+
+window.localStorage.setItem('book', '');
+
 // Display Construtor
 
 function Display() {
@@ -24,10 +29,7 @@ Display.prototype.add = function(book) {
                     <td>${book.name}</td>
                     <td>${book.author}</td>
                     <td>${book.type}</td>
-                     <td><a href="#"  class="btn btn-primary edit a-btn-slide-text">
-                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                     <span><strong>Edit</strong></span>            
-                    </a> <button type="button" onclick="remove(${book.no})" class="btn btn-danger">Remove Book</button>
+                     <td> <button type="button" onclick="remove(${book.no})" class="btn btn-danger">Remove Book</button>
                     </<a>
                     </tr>`;
     tabelbody.innerHTML += uistring
@@ -190,12 +192,12 @@ for (var i = 1; i < table.rows.length; i++) {
 
 // edit the row
 function editRow() {
-    table.rows[rIndex].cells[0].innerHTML = document.getElementById("fname").value;
-    table.rows[rIndex].cells[1].innerHTML = document.getElementById("lname").value;
-    table.rows[rIndex].cells[2].innerHTML = document.getElementById("age").value;
-    table.rows[rIndex].cells[3].innerHTML = document.getElementById("age").value;
-    table.rows[rIndex].cells[4].innerHTML = document.getElementById("age").value;
-    table.rows[rIndex].cells[5].innerHTML = document.getElementById("age").value;
+    table.rows[rIndex].cells[0].innerHTML = document.getElementById("bookNumber").value;
+    table.rows[rIndex].cells[1].innerHTML = document.getElementById("bookName").value;
+    table.rows[rIndex].cells[2].innerHTML = document.getElementById("auther").value;
+    table.rows[rIndex].cells[3].innerHTML = document.getElementById("fiction").value;
+    table.rows[rIndex].cells[4].innerHTML = document.getElementById("Programming").value;
+    table.rows[rIndex].cells[5].innerHTML = document.getElementById("cooking").value;
 }
 
 
