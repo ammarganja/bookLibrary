@@ -31,6 +31,7 @@ Display.prototype.add = function(book) {
                     <td>${book.type}</td>
                      <td> <button type="button" onclick="remove(${book.no})" class="btn btn-danger">Remove Book</button>
                     </<a>
+                    <td></td>
                     </tr>`;
     tabelbody.innerHTML += uistring
 }
@@ -169,6 +170,88 @@ function filter(event) {
 
 
 
+
+function searchdata() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("input-data");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tabelbody");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function searchdata() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("input-data");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tabelbody");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function searchdata() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("input-data");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tabelbody");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[2];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function searchdata() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("input-data");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tabelbody");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[3];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+const search = document.getElementById("search-btn");
+search.addEventListener("click", searchdata);
+
+
+
 // edit data in table
 
 
@@ -191,18 +274,18 @@ for (var i = 1; i < table.rows.length; i++) {
 
 
 // edit the row
-function editRow() {
-    table.rows[rIndex].cells[0].innerHTML = document.getElementById("bookNumber").value;
-    table.rows[rIndex].cells[1].innerHTML = document.getElementById("bookName").value;
-    table.rows[rIndex].cells[2].innerHTML = document.getElementById("auther").value;
-    table.rows[rIndex].cells[3].innerHTML = document.getElementById("fiction").value;
-    table.rows[rIndex].cells[4].innerHTML = document.getElementById("Programming").value;
-    table.rows[rIndex].cells[5].innerHTML = document.getElementById("cooking").value;
-}
+// function editRow() {
+//     table.rows[rIndex].cells[0].innerHTML = document.getElementById("bookNumber").value;
+//     table.rows[rIndex].cells[1].innerHTML = document.getElementById("bookName").value;
+//     table.rows[rIndex].cells[2].innerHTML = document.getElementById("auther").value;
+//     table.rows[rIndex].cells[3].innerHTML = document.getElementById("fiction").value;
+//     table.rows[rIndex].cells[4].innerHTML = document.getElementById("Programming").value;
+//     table.rows[rIndex].cells[5].innerHTML = document.getElementById("cooking").value;
+// }
 
 
-let edit = document.getElementById('noFilters');
-edit.addEventListener("click", editRow);
+// let edit = document.getElementById('noFilters');
+// edit.addEventListener("click", editRow);
 
 
 
