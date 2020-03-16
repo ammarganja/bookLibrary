@@ -21,7 +21,7 @@ function Display() {
 
 // add mathod to display Prototype
 
-Display.prototype.add = function(book) {
+var add = function(book) {
     // console.log("Adding to UI")
     tabelbody = document.getElementById("tabelbody")
     let uistring = `<tr id=${book.no}>
@@ -44,20 +44,20 @@ function remove(id) {
 
 
 
-Display.prototype.clear = function() {
+var clear = function() {
     let LibraryForm = document.getElementById("LibraryForm");
     LibraryForm.reset();
 }
 
 
-Display.prototype.validate = function(book) {
+var validate = function(book) {
     if (book.name.length < 2 || book.author.length < 2) {
         return false;
     } else {
         return true;
     }
 }
-Display.prototype.show = function(type, displayMessage) {
+var show = function(type, displayMessage) {
     let message = document.getElementById("message");
     message.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
                         <strong>message : </strong> ${displayMessage}
@@ -319,12 +319,12 @@ function LibraryFormSubmit(e) {
     let display = new Display(book);
 
 
-    if (display.validate(book)) {
-        display.add(book);
-        display.clear();
-        display.show("success", "Your book has been successfully added")
+    if (validate(book)) {
+        add(book);
+        clear();
+        show("success", "Your book has been successfully added")
     } else {
-        display.show("danger", "Sorry you can't add this book ")
+        show("danger", "Sorry you can't add this book ")
     }
 
 }
