@@ -168,9 +168,6 @@ function filter(event) {
     event.preventDefault();
 }
 
-
-
-
 function searchdata() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("input-data");
@@ -189,6 +186,7 @@ function searchdata() {
         }
     }
 }
+
 
 function searchdata() {
     var input, filter, table, tr, td, i, txtValue;
