@@ -146,25 +146,18 @@ function sortTablenum() {
     list = document.getElementById("tabelbody");
     switching = true;
     dir = "asc";
-
     while (switching) {
-
         switching = false;
         b = list.getElementsByTagName("LI");
-
         for (i = 0; i < (b.length - 1); i++) {
-
             shouldSwitch = false;
-
             if (dir == "asc") {
                 if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
-
                     shouldSwitch = true;
                     break;
                 }
             } else if (dir == "desc") {
                 if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
-
                     shouldSwitch = true;
                     break;
                 }
@@ -174,10 +167,8 @@ function sortTablenum() {
 
             b[i].parentNode.insertBefore(b[i + 1], b[i]);
             switching = true;
-
             switchcount++;
         } else {
-
             if (switchcount == 0 && dir == "asc") {
                 dir = "desc";
                 switching = true;
@@ -191,26 +182,20 @@ function sortTablestr(num) {
     table = document.getElementById("tabelbody");
     switching = true;
     dir = "asc";
-
     while (switching) {
-
         switching = false;
         rows = table.rows;
-
         for (i = 1; i < (rows.length - 1); i++) {
-
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[num];
             y = rows[i + 1].getElementsByTagName("TD")[num];
             if (dir == "asc") {
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-
                     shouldSwitch = true;
                     break;
                 }
             } else if (dir == "desc") {
                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-
                     shouldSwitch = true;
                     break;
                 }
