@@ -1,3 +1,7 @@
+// create array and push
+let arr1 = [];
+
+
 // book is a function constructor 
 
 function Book(name, author, type, number) {
@@ -23,17 +27,22 @@ function Display() {
 
 var add = function(book) {
     // console.log("Adding to UI")
-    tabelbody = document.getElementById("tabelbody")
-    let uistring = `<tr id=${book.no}>
-                    <td>${book.no}</td>
-                    <td>${book.name}</td>
-                    <td>${book.author}</td>
-                    <td>${book.type}</td>
-                     <td> <button type="button" onclick="remove(${book.no})" class="btn btn-danger">Remove Book</button>
+    tabelbody = document.getElementById("tabelbody");
+    let uistring;
+    for (var i = 0; i < arr1.length; i++) {
+        // console.log(arr1[i]);
+        uistring = `<tr id=${arr1[i].no}>
+                    <td>${arr1[i].no}</td>
+                    <td>${arr1[i].name}</td>
+                    <td>${arr1[i].author}</td>
+                    <td>${arr1[i].type}</td>
+                     <td> <button type="button" onclick="remove(${arr1[i].no})" class="btn btn-danger">Remove Book</button>
                     </<a>
                     <td></td>
                     </tr>`;
+    }
     tabelbody.innerHTML += uistring
+
 }
 
 
@@ -77,64 +86,156 @@ let LibraryForm = document.getElementById("LibraryForm");
 LibraryForm.addEventListener("submit", LibraryFormSubmit);
 
 
-// create array and push
-let arr1 = [];
+
 
 
 // data sorting
 
-function sortTablenum() {
-    var table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("tabelbody");
-    switching = true;
-    while (switching) {
-        switching = false;
-        rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[0];
-            // console.log(x);
-            y = rows[i + 1].getElementsByTagName("TD")[0];
+// function sortTablenum() {
+//     var table, rows, switching, i, x, y, shouldSwitch;
+//     table = document.getElementById("tabelbody");
+//     switching = true;
+//     while (switching) {
+//         switching = false;
+//         rows = table.rows;
+//         for (i = 1; i < (rows.length - 1); i++) {
+//             shouldSwitch = false;
+//             x = rows[i].getElementsByTagName("TD")[0];
+//             // console.log(x);
+//             y = rows[i + 1].getElementsByTagName("TD")[0];
 
-            if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                shouldSwitch = true;
-                break;
+//             if (Number(x.innerHTML) > Number(y.innerHTML)) {
+//                 shouldSwitch = true;
+//                 break;
+//             }
+//         }
+//         if (shouldSwitch) {
+//             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+//             switching = true;
+//         }
+//     }
+// }
+
+// function sortTablestr(num) {
+//     var table, rows, switching, i, x, y, shouldSwitch;
+//     table = document.getElementById("tabelbody");
+//     switching = true;
+//     while (switching) {
+//         switching = false;
+//         rows = table.rows;
+//         for (i = 1; i < (rows.length - 1); i++) {
+//             shouldSwitch = false;
+//             x = rows[i].getElementsByTagName("TD")[num];
+//             // console.log(x);
+//             y = rows[i + 1].getElementsByTagName("TD")[num];
+
+//             if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+//                 shouldSwitch = true;
+//                 break;
+//             }
+//         }
+//         if (shouldSwitch) {
+//             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+//             switching = true;
+//         }
+//     }
+// }
+
+function sortTablenum() {
+    var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+    list = document.getElementById("tabelbody");
+    switching = true;
+    dir = "asc";
+
+    while (switching) {
+
+        switching = false;
+        b = list.getElementsByTagName("LI");
+
+        for (i = 0; i < (b.length - 1); i++) {
+
+            shouldSwitch = false;
+
+            if (dir == "asc") {
+                if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+
+                    shouldSwitch = true;
+                    break;
+                }
             }
         }
         if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+
+            b[i].parentNode.insertBefore(b[i + 1], b[i]);
             switching = true;
+
+            switchcount++;
+        } else {
+
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
         }
     }
 }
 
 function sortTablestr(num) {
-    var table, rows, switching, i, x, y, shouldSwitch;
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("tabelbody");
     switching = true;
+    dir = "asc";
+
     while (switching) {
+
         switching = false;
         rows = table.rows;
+
         for (i = 1; i < (rows.length - 1); i++) {
+
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("TD")[num];
-            // console.log(x);
             y = rows[i + 1].getElementsByTagName("TD")[num];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
 
-            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                shouldSwitch = true;
-                break;
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+
+                    shouldSwitch = true;
+                    break;
+                }
             }
         }
         if (shouldSwitch) {
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
         }
     }
 }
 
-let Filter = document.getElementById('noFilters');
-Filter.addEventListener("click", sortTablenum);
+// let Filter = document.getElementById('noFilters');
+// Filter.addEventListener("click", sortTablenum);
+let noFilters = document.getElementById("noFilters")
+noFilters.addEventListener("click", (e) => {
+    e.preventDefault();
+    sortTablestr(0);
+});
 let nameFilter = document.getElementById("nameFilters")
 nameFilter.addEventListener("click", (e) => {
     e.preventDefault();
@@ -174,7 +275,9 @@ function searchdata() {
     filter = input.value.toUpperCase();
     table = document.getElementById("tabelbody");
     tr = table.getElementsByTagName("tr");
+
     for (i = 0; i < tr.length; i++) {
+        console.log(tr);
         td = tr[i].getElementsByTagName("td")[1];
         if (td) {
             txtValue = td.textContent || td.innerText;
@@ -186,6 +289,8 @@ function searchdata() {
         }
     }
 }
+
+
 
 
 
@@ -254,7 +359,7 @@ function LibraryFormSubmit(e) {
 
     }
     let book = new Book(name, auther, type, number);
-    console.log(book);
+    // console.log(book);
 
     arr1.push(book);
     console.log(arr1);
