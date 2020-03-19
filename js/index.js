@@ -89,57 +89,9 @@ LibraryForm.addEventListener("submit", LibraryFormSubmit);
 
 
 
-// data sorting
 
-// function sortTablenum() {
-//     var table, rows, switching, i, x, y, shouldSwitch;
-//     table = document.getElementById("tabelbody");
-//     switching = true;
-//     while (switching) {
-//         switching = false;
-//         rows = table.rows;
-//         for (i = 1; i < (rows.length - 1); i++) {
-//             shouldSwitch = false;
-//             x = rows[i].getElementsByTagName("TD")[0];
-//             // console.log(x);
-//             y = rows[i + 1].getElementsByTagName("TD")[0];
 
-//             if (Number(x.innerHTML) > Number(y.innerHTML)) {
-//                 shouldSwitch = true;
-//                 break;
-//             }
-//         }
-//         if (shouldSwitch) {
-//             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-//             switching = true;
-//         }
-//     }
-// }
 
-// function sortTablestr(num) {
-//     var table, rows, switching, i, x, y, shouldSwitch;
-//     table = document.getElementById("tabelbody");
-//     switching = true;
-//     while (switching) {
-//         switching = false;
-//         rows = table.rows;
-//         for (i = 1; i < (rows.length - 1); i++) {
-//             shouldSwitch = false;
-//             x = rows[i].getElementsByTagName("TD")[num];
-//             // console.log(x);
-//             y = rows[i + 1].getElementsByTagName("TD")[num];
-
-//             if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-//                 shouldSwitch = true;
-//                 break;
-//             }
-//         }
-//         if (shouldSwitch) {
-//             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-//             switching = true;
-//         }
-//     }
-// }
 
 function sortTablenum() {
     var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
@@ -254,23 +206,58 @@ function filter(event) {
     event.preventDefault();
 }
 
+
+//search teable
+
+
 function searchdata() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("input-data");
     filter = input.value.toUpperCase();
     table = document.getElementById("tabelbody");
     tr = table.getElementsByTagName("tr");
-
     for (i = 0; i < tr.length; i++) {
-        console.log(tr);
-        td = tr[i].getElementsByTagName("td")[1];
+        var abc = 0;
+        td = tr[i].getElementsByTagName("td")[0];
         if (td) {
             txtValue = td.textContent || td.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                tr[i].style.display = "";
+            if (txtValue.toUpperCase().indexOf(filter) == 0) {
+                abc = 1;
             } else {
-                tr[i].style.display = "none";
+                // tr[i].style.display = "none";
             }
+        }
+        td1 = tr[i].getElementsByTagName("td")[1];
+        if (td1) {
+            txtValue = td1.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) == 0) {
+                abc = 1;
+            } else {
+                //tr[i].style.display = "none";
+            }
+        }
+        td1 = tr[i].getElementsByTagName("td")[2];
+        if (td1) {
+            txtValue = td1.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) == 0) {
+                abc = 1;
+            } else {
+                //tr[i].style.display = "none";
+            }
+        }
+        td1 = tr[i].getElementsByTagName("td")[3];
+        if (td1) {
+            txtValue = td1.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) == 0) {
+                abc = 1;
+            } else {
+                //tr[i].style.display = "none";
+            }
+        }
+        if (abc == 1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
         }
     }
 }
@@ -279,9 +266,13 @@ function searchdata() {
 
 
 
-const search = document.getElementById("search-btn");
-search.addEventListener("click", searchdata);
 
+
+let search = document.getElementById("search-btn");
+search.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchdata()
+});
 
 
 // edit data in table
